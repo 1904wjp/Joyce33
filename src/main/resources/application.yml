@@ -21,6 +21,18 @@ spring:
     servlet:
       content-type: text/html
     cache: false
+  devtools:
+    remote:
+      restart:
+        enabled: true
+    restart:
+      additional-paths: src/main
+  mail:
+    host: smtp.qq.com
+    username: 1692239985@qq.com
+    password: rhvyoanzgysdgcdc
+    default-encoding: UTF-8
+    from: 1692239985@qq.com
 
 mybatis-plus:
   global-config:
@@ -29,3 +41,7 @@ mybatis-plus:
       logic-delete-value: 1
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+file:
+  upload:
+    path: E://images/
+      relative: /images/**

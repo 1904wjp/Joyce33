@@ -1,10 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>用户登录</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .container{
+
+            display:table;
+            height:100%;
+
+        }
+        .form-group{
+            width: 180%;
+        }
+        .row{
+            display: table-cell;
+            vertical-align: middle;
+        }
+        /* centered columns styles */
+        .row-centered {
+            text-align:center;
+        }
+        .col-centered {
+            display:inline-block;
+            float:none;
+            text-align:left;
+            margin-right:-4px;
+        }
+
+    </style>
+
 </head>
 <body>
+<div class="container">
+    <div class="row row-centered">
+        <div class="well col-md-6 col-centered">
 
+            <form class="form-horizontal center-block" role="form" action="/example/user/doLogin" method="post">
+                <legend>用户登录</legend>
+                <div class="form-group ">
+                    <label class="col-sm-2 control-label" for="username">用户名</label>
+                    <div  class="col-sm-4 ">
+                        <input class="form-control" id="username" type="text" name="username" placeholder="请输入用户名"  />
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label class="col-sm-2 control-label" for="password">密码</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="password" type="password"  name="password" placeholder="请输入密码"/>
+                    </div>
+                </div>
+
+
+                <!--   <div class="form-group ">
+                       <label class="col-sm-2 control-label" for="ds_host">账号类型</label>
+                       <div class="col-sm-4">
+                           <select id="disabledSelect" class="form-control">
+                               <option>学生</option>
+                               <option>老师</option>
+                               <option>管理员</option>
+                           </select>
+                       </div>
+                   </div>-->
+                <div class="form-group ">
+                    <label class="col-sm-2 control-label" for="select"> </label>
+                    <div class="col-sm-4">
+                        <input class="btn btn-default pull-left" id="regist" type="submit" value="登录"/>
+                        <a class="btn btn-default pull-right" th:href="@{'/example/user/regist'}">去注册</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var img = Math.round(Math.random() * 10);
+    var Img = new Array();
+    //需要加载的背景图片
+    Img[0] = "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3735316392,212988712&fm=200&gp=0.jpg"
+    Img[1] = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4165415060,2023874983&fm=26&gp=0.jpg"
+    Img[2] = "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3706677817,1678627265&fm=26&gp=0.jpg"
+    Img[3] = "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=518541639,428272303&fm=26&gp=0.jpg"
+    Img[4] = "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1482498295,222129637&fm=26&gp=0.jpg"
+    Img[5] = "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=357843698,3560590396&fm=26&gp=0.jpg"
+    Img[6] = "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic1.zhimg.com%2Fv2-0a760f7fe141e66bc765bd780d2e0a38_1440w.jpg%3Fsource%3D172ae18b&refer=http%3A%2F%2Fpic1.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1633253145&t=66a6fc4ce509abc02e9d79ab3c1c9f1d"
+    Img[7] = "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4189220961,2869949368&fm=26&gp=0.jpg"
+    Img[8] = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3004924597,1854631352&fm=26&gp=0.jpg"
+    Img[9] = "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fww1.sinaimg.cn%2Fmw690%2F0074FH44ly1gt8ig166u8j30to0z843h.jpg&refer=http%3A%2F%2Fwww.sina.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1633253145&t=642b297f521c6fee2c02238a7172b12f"
+    Img[10] = "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsearchfoto.ru%2Fimg%2FxyygpKbDS1y8pTjXRy83VS8rMS9fLSy3RL8mwz0yx9fcM0POIMipIDo409g7I8jIMLTC3qDIKT0n3SPTxUEvMLbAutzUyNgCzMmwNzSGsomJbQzCjIDnHNgUMwNx8W1OIMNBoQz1DAA.jpg&refer=http%3A%2F%2Fsearchfoto.ru&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1633253145&t=e2250d692d56bae2215c438953d349ca"
+    if(document.readyState === "loading" ||document.readyState === "interactive" ||document.readyState === "complete")
+    {
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.position = "center center" ;
+        document.body.style.backgroundAttachment = "fixed";
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundImage = "URL("+Img[img]+")";
+    }
+</script>
 </body>
 </html>

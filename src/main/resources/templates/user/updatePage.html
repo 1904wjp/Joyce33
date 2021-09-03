@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>用户注册</title>
+    <title>用户修改信息</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -41,36 +41,37 @@
 
 
             <form class="form-horizontal center-block" role="form" action="/example/user/doSaveUser" method="post">
-                <legend>用户注册</legend>
+                <legend>用户修改信息</legend>
+                <input name="id" type="hidden" th:value="${user.id}">
                 <div class="form-group ">
-                    <label class="col-sm-2 control-label" for="username">用户名</label>
+                    <label class="col-sm-2 control-label" for="username" >用户名</label>
                     <div  class="col-sm-4 ">
-                        <input class="form-control" id="username" type="text" name="username" placeholder="请输入用户名"/>
+                        <input class="form-control" id="username" type="text" name="username" placeholder="请输入用户名" th:value="${user.username}"/>
                     </div>
                 </div>
                 <div class="form-group ">
                     <label class="col-sm-2 control-label" for="password">密码</label>
                     <div class="col-sm-4">
-                        <input class="form-control" id="password" type="password"  name="password"  placeholder="请输入密码"/>
+                        <input class="form-control" id="password" type="password"  name="password"  placeholder="请输入密码" th:value="${user.password}"/>
                     </div>
                 </div>
                 <div class="form-group ">
                     <label class="col-sm-2 control-label" for="phone">手机号码</label>
                     <div class="col-sm-4">
-                        <input class="form-control" id="phone" type="text" name="phone"  placeholder="请输入手机号码"/>
+                        <input class="form-control" id="phone" type="text" name="phone"  placeholder="请输入手机号码"  th:value="${user.phone}"/>
                     </div>
                 </div>
                 <div class="form-group ">
                     <label class="col-sm-2 control-label" for="email">邮件</label>
                     <div class="col-sm-4">
-                        <input class="form-control" id="email" type="text"  name="email" placeholder="请输入邮件"/>
+                        <input class="form-control" id="email" type="text"  name="email" placeholder="请输入邮件"  th:value="${user.email}"/>
                     </div>
                 </div>
                 <div class="form-group ">
                     <label class="col-sm-2 control-label" for="select"> </label>
                     <div class="col-sm-4">
-                        <input class="btn btn-default pull-left" id="regist" type="submit" value="注册"/>
-                        <a class="btn btn-default pull-right" th:href="@{'/example/user/login'}">去登录</a>
+                        <a class="btn btn-default" th:href="@{'/example/user/userList'}">返回</a>
+                        <input class="btn btn-default pull-right" id="regist" type="submit" value="确认修改"/>
                     </div>
                 </div>
             </form>

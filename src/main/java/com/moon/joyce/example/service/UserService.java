@@ -19,6 +19,12 @@ public interface UserService extends IService<User> {
      * @param user
      * @return
      */
+    int getUserCount(User user,String type);
+    /**
+     * 根据条件查询user
+     * @param user
+     * @return
+     */
     User getUser(User user,String type);
 
 
@@ -29,5 +35,11 @@ public interface UserService extends IService<User> {
      */
     List<User> getListUser(User user);
 
+    /**
+     * 根据条件查询user
+     * @param user
+     * @return
+     */
+    int updateUser(User newUser,User user,String type);
 
 }

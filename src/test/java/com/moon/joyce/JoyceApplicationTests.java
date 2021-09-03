@@ -8,14 +8,12 @@ import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
-;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.moon.joyce.example.entity.User;
-import com.moon.joyce.example.mapper.UserMapper;
 import com.moon.joyce.example.service.UserService;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 
 import java.util.List;
 
