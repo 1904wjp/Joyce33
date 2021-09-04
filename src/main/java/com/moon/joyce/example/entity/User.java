@@ -7,12 +7,14 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.moon.joyce.commons.base.entity.BaseEntity;
+import com.moon.joyce.commons.utils.entity.Page;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * 用户
  * </p>
  *
  * @author Joyce
@@ -20,40 +22,22 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class User extends Model<User> {
+@TableName("user")
+public class User extends Page {
 
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private static final long serialVersionUID = 8843327699543286578L;
     private String username;
     private String password;
     private String phone;
     private String email;
     @TableField("secondar_password")
     private String secondarPassword;
-    @TableField("create_by")
-    private String createBy;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @TableField(value = "create_time",fill = FieldFill.INSERT)
-    private Date createTime;
-    @TableField("update_by")
-    private String updateBy;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @TableField(value = "update_time",fill = FieldFill.UPDATE)
-    private Date updateTime;
-    @TableLogic
-    @TableField(value = "delete_flag")
-    private Integer deleteFlag;
+
     private Integer status;
     @TableField(value = "status_code")
     private String statusCode;
     @TableField(value = "file_url")
     private String fileUrl;
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
+    @TableField(value = "user_type_id")
+    private Long UserTypeId;
 }

@@ -1,60 +1,42 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>用户修改信息</title>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style type="text/css">
-        body{background: url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F0325%252F51e0027fj00qqitbs005oc000jg00jgm.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1633146502&t=e881a91147038300b59ea035d9f94331) no-repeat;background-size:cover;}
-        .container{
-            display:table;
-            height:100%;
-
-        }
-        .form-group{
-            width: 180%;
-        }
-        .row{
-            display: table-cell;
-            vertical-align: middle;
-        }
-        /* centered columns styles */
-        .row-centered {
-            text-align:center;
-        }
-        .col-centered {
-            display:inline-block;
-            float:none;
-            text-align:left;
-            margin-right:-4px;
-        }
-
-    </style>
-
+<head class="paneBar" th:replace="/common/public/header::header(~{::title})">
+    <title>用户修改基本信息</title>
 </head>
-<body>
+
 <div class="container">
     <div class="row row-centered">
         <div class="well col-md-6 col-centered">
 
-
-            <form class="form-horizontal center-block" role="form" action="/example/user/doSaveUser" method="post">
+            <form class="form-horizontal center-block" role="form"  method="get">
                 <legend>用户修改信息</legend>
-                <input name="id" type="hidden" th:value="${user.id}">
+                <input name="id" id="id" type="hidden" th:value="${user.id}">
+                <div class="form-group ">
+                    <label class="col-sm-2 control-label" for="username" >用户名</label>
+                    <div  class="col-sm-4 ">
+                        <form action="../upload" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" accept="image/*">
+                            <br>
+                            <input type="text" value="">
+                            <input type="submit" value="上传" class="btn btn-success">
+                        </form>
+                        [[${filename}]]
+                        <br>
+                        <img th:src="@{${filename}}" alt="图片">
+                    </div>
+                </div>
                 <div class="form-group ">
                     <label class="col-sm-2 control-label" for="username" >用户名</label>
                     <div  class="col-sm-4 ">
                         <input class="form-control" id="username" type="text" name="username" placeholder="请输入用户名" th:value="${user.username}"/>
                     </div>
                 </div>
-                <div class="form-group ">
+              <!--  <div class="form-group ">
                     <label class="col-sm-2 control-label" for="password">密码</label>
                     <div class="col-sm-4">
                         <input class="form-control" id="password" type="password"  name="password"  placeholder="请输入密码" th:value="${user.password}"/>
                     </div>
-                </div>
+                </div>-->
+                <input class="form-control" id="password" type="hidden"  name="password"  placeholder="请输入密码" th:value="${user.password}"/>
+
                 <div class="form-group ">
                     <label class="col-sm-2 control-label" for="phone">手机号码</label>
                     <div class="col-sm-4">
@@ -70,8 +52,8 @@
                 <div class="form-group ">
                     <label class="col-sm-2 control-label" for="select"> </label>
                     <div class="col-sm-4">
-                        <a class="btn btn-default" th:href="@{'/example/user/userList'}">返回</a>
-                        <input class="btn btn-default pull-right" id="regist" type="submit" value="确认修改"/>
+                        <input class="btn btn-default pull-left" id="regist" type="submit" onclick="updateUserFuc()" value="确认修改"/>
+                        <a class="btn btn-default pull-right" th:href="@{'/example/user/userList'}">返回</a>
                     </div>
                 </div>
             </form>
@@ -80,5 +62,5 @@
     </div>
 </div>
 
-</body>
-</html>
+
+<head class="panelBar" th:replace="/common/public/footer::footer"></head>

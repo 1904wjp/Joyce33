@@ -5,4 +5,45 @@
    <!-- &lt;!&ndash; 开启二级缓存 &ndash;&gt;
     <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 -->
+
+
+   <!--先分页查询后对结果排序-->
+   <select id="getUsers"   resultType="com.moon.joyce.example.entity.User">
+      SELECT *
+      FROM user
+     <where>
+         <if test="id != null"> and id = #{id} </if>
+         <if test="username != null and username != ''"> and username = #{username} </if>
+         <if test="password != null and password != ''"> and password= #{password} </if>
+         <if test="phone!= null and phone!= ''"> and phone = #{phone} </if>
+         <if test="email != null and email != ''"> and email = #{email} </if>
+         <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+         <if test="secondarPassword != null and secondarPassword!=''"> and secondar_password = #{secondarPassword} </if>
+         <if test="status != null"> and image = #{status} </if>
+         <if test="userTypeId != null and userTypeId != ''"> and user_type_id = #{userTypeId} </if>
+      </where>
+         LIMIT #{offset}, #{pageNumber}
+
+
+   </select>
+
+   <!--统计所有数据数量-->
+   <select id="getTatlo" resultType="java.lang.Integer">
+      SELECT count(1)
+      FROM user
+     <!--<where>
+        parameterType="com.moon.joyce.commons.utils.entity.Query"
+         <if test="id != null"> and id = #{id} </if>
+         <if test="username != null and username != ''"> and username = #{username} </if>
+         <if test="password != null password != ''"> and password= #{password} </if>
+         <if test="phone!= null and phone!= ''"> and phone = #{phone} </if>
+         <if test="email != null and email != ''"> and email = #{email} </if>
+         <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+         <if test="secondarPassword != null and secondarPassword!=''"> and secondar_password = #{secondarPassword} </if>
+         <if test="status != null"> and image = #{status} </if>
+         <if test="userTypeId != null and userTypeId != ''"> and user_type_id = #{userTypeId} </if>
+      </where>-->
+   </select>
+
+
 </mapper>

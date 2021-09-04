@@ -6,6 +6,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.Serializable;
 import java.util.Properties;
 
 /**
@@ -13,12 +14,15 @@ import java.util.Properties;
  * @date 2021/9/2 17:51
  * @desc  邮件工具类
  */
-public class EmailUtils {
+public class EmailUtils implements Serializable {
+    private static final long serialVersionUID = 4647492534040558478L;
+
     /**
      * 发送验证码
      * @param recipient 邮件地址
+     * @param num 随机验证码的位数
      */
-    public  static void SendMailCode(String recipient) {
+    public  static String SendMailCode(String recipient,int num) {
         //做链接前的准备工作  也就是参数初始化
         Properties properties = new Properties();
         properties.setProperty("mail.smtp.host", "smtp.qq.com");//发送邮箱服务器
@@ -32,33 +36,38 @@ public class EmailUtils {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication("1692239985@qq.com", "rhvyoanzgysdgcdc");
+                return new PasswordAuthentication(Contract.SEND_EMAIL_CODE, Contract.SEND_EMAIL_AUTH_CODE);
                 //这里第一个参数是发件人邮箱号码，第二个是邮箱的验证码下面解释
             }
         });
-
+        //创建验证码
+        String code="";
         //创建邮件对象
         Message message = new MimeMessage(session);
         try {
             //设置发件人
-            message.setFrom(new InternetAddress("1692239985@qq.com"));
+            message.setFrom(new InternetAddress(Contract.SEND_EMAIL_CODE));
             //设置收件人
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));//收件人
+            //随机生成验证码
+           // code = RandomStringUtils.random( num ,  Contract.SEND_EMAIL_VERIFICATION_CODE.toCharArray());
             //设置主题
-            String code = RandomStringUtils.random( 5 ,  Contract.SEND_EMAIL_VERIFICATION_CODE.toCharArray());
+            code="写给悟能的信";
             message.setSubject(code);
             //设置邮件正文  第二个参数是邮件发送的类型
-            String context = Contract.SEND_EMAIL_TEMPLATE+code;
-            message.setContent(context, "text/html;charset=UTF-8");
+            //String context = Contract.SEND_EMAIL_TEMPLATE+code;
+            String context = "你是猪，你是八戒";
+            message.setContent(context, Contract.SEND_EMAIL_FORMATE);
             //发送一封邮件
             Transport transport = session.getTransport();
-            transport.connect("1692239985@qq.com", "hqlovexx1017");
+            transport.connect(Contract.SEND_EMAIL_CODE, Contract.SEND_EMAIL_PASSWORD);
             //这里两个参数是发件人 qq账号和密码
             Transport.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();
         } finally {
         }
+        return code;
     }
 
 }

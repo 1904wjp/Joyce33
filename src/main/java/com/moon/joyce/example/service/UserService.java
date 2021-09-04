@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.moon.joyce.example.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -27,6 +28,22 @@ public interface UserService extends IService<User> {
      */
     User getUser(User user,String type);
 
+    /**
+     * 先分页查询后对结果排序
+     * @param params
+     * @return
+     */
+    List<User>  getUserList(User user);
+
+
+
+    /**
+     * 统计所有数据数量
+     * @param params
+     * @return
+     */
+    int getUsersCount();
+
 
     /**
      * 根据条件获取user list数据
@@ -40,6 +57,6 @@ public interface UserService extends IService<User> {
      * @param user
      * @return
      */
-    int updateUser(User newUser,User user,String type);
+    int updateUser(User dbUser,User user,String type);
 
 }
