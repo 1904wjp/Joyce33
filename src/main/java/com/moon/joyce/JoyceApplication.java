@@ -37,7 +37,7 @@ public class JoyceApplication {
      */
     public static void main(String[] args) {
         SpringApplication.run(JoyceApplication.class, args);
-        System.out.println("Joyce start successful");
+        System.out.println("___________________________Joyce start successful___________________________");
     }
 
 
