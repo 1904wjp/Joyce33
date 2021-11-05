@@ -1,6 +1,6 @@
 package com.moon.joyce.commons.utils;
 
-import com.moon.joyce.commons.contracts.Contract;
+import com.moon.joyce.commons.constants.Constant;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.mail.*;
@@ -16,7 +16,6 @@ import java.util.Properties;
  */
 public class EmailUtils implements Serializable {
     private static final long serialVersionUID = 4647492534040558478L;
-
     /**
      * 发送验证码
      * @param recipient 邮件地址
@@ -35,8 +34,7 @@ public class EmailUtils implements Serializable {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-
-                return new PasswordAuthentication(Contract.SEND_EMAIL_CODE, Contract.SEND_EMAIL_AUTH_CODE);
+                return new PasswordAuthentication(Constant.SEND_EMAIL_CODE, Constant.SEND_EMAIL_AUTH_CODE);
                 //这里第一个参数是发件人邮箱号码，第二个是邮箱的验证码下面解释
             }
         });
@@ -46,21 +44,19 @@ public class EmailUtils implements Serializable {
         Message message = new MimeMessage(session);
         try {
             //设置发件人
-            message.setFrom(new InternetAddress(Contract.SEND_EMAIL_CODE));
+            message.setFrom(new InternetAddress(Constant.SEND_EMAIL_CODE));
             //设置收件人
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));//收件人
             //随机生成验证码
-           // code = RandomStringUtils.random( num ,  Contract.SEND_EMAIL_VERIFICATION_CODE.toCharArray());
+            code = RandomStringUtils.random( num,"0123456789".toCharArray() );
             //设置主题
-            code="写给悟能的信";
             message.setSubject(code);
             //设置邮件正文  第二个参数是邮件发送的类型
-            //String context = Contract.SEND_EMAIL_TEMPLATE+code;
-            String context = "你是猪，你是八戒";
-            message.setContent(context, Contract.SEND_EMAIL_FORMATE);
+            String context = Constant.SEND_EMAIL_TEMPLATE+code;
+            message.setContent(context, Constant.SEND_EMAIL_FORMATE);
             //发送一封邮件
             Transport transport = session.getTransport();
-            transport.connect(Contract.SEND_EMAIL_CODE, Contract.SEND_EMAIL_PASSWORD);
+            transport.connect(Constant.SEND_EMAIL_CODE, Constant.SEND_EMAIL_PASSWORD);
             //这里两个参数是发件人 qq账号和密码
             Transport.send(message);
         } catch (MessagingException e) {

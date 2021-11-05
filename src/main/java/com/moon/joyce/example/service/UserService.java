@@ -45,12 +45,6 @@ public interface UserService extends IService<User> {
     int getUsersCount();
 
 
-    /**
-     * 根据条件获取user list数据
-     * @param user
-     * @return
-     */
-    List<User> getListUser(User user);
 
     /**
      * 根据条件查询user

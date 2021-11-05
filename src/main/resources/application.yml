@@ -3,7 +3,8 @@ server:
   port: 9099
 #app相关信息
 app:
-  url: http://localhost:9099
+  urlValue: 192.168.2.15:${server.port}
+  url: http://${app.urlValue}
   name: Joyce
   version: 1.0
 #数据库数据源相关配置
@@ -12,7 +13,7 @@ spring:
     url: jdbc:mysql://localhost:3306/springboot?useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: root
+    password: 123456
     initial-size: 10
     max-active: 20
     max-idle: 8
@@ -20,7 +21,7 @@ spring:
   #静态资源路径配置
   web:
     resources:
-      static-locations: classpath:static/
+      static-locations: classpath:static/,file:${file.upload.path}
   #thymeleaf的配置
   thymeleaf:
     prefix: classpath:/templates/
@@ -41,19 +42,28 @@ spring:
   mail:
     host: smtp.qq.com
     #发送者邮件
-    username: 1692239985@qq.com
+    username: 1154517070@qq.com
     # 生成的密匙
-    password: rhvyoanzgysdgcdc
+    password: cbeilolivceihghd
     default-encoding: UTF-8
-    from: 1692239985@qq.com
+    from: 1154517070@qq.com
+    emailPassword: hj951206
   mvc:
     hiddenmethod:
       filter:
         enabled: false
+    static-path-pattern: /static/**
   servlet:
     multipart:
       #最大的上传数据
       max-file-size: 5MB
+  #jpa配置
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
 #mybatis-plus配置
 mybatis-plus:
   global-config:
@@ -71,9 +81,15 @@ pagehelper:
   support-methods-arguments: true
 #文件路径上传路径
 file:
+  config:
+    path: D://${app.name}/files/config/
   upload:
-    path: D://images/#
-    relative: /images/**
+    access: /img/photo/${random.int}/
+    relative: ${file.upload.access}**
+    path: D://${app.name}/upload/images/
+
+
+
 #监听获得当前登录者
 context:
   initializer:
