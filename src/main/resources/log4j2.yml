@@ -1,0 +1,51 @@
+Configuration:
+  status: warn
+
+  Properties: # 定义全局变量
+    Property:
+      - name: CONSOLE_LEVEL
+        value: info
+      - name: ROLLING_FILE_LEVEL
+        value: warn
+      - name: LOG_PATH
+        value: log
+      - name: LOG_FILENAME
+        value: tcm-health-log
+
+  Appenders:
+    Console: #输出到控制台
+      - name: CONSOLE
+        target: SYSTEM_OUT
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss} : %4p %t (%F:%L) - %m%n"
+        ThresholdFilter:
+          level: ${sys:CONSOLE_LEVEL} # “sys:”表示：如果VM参数中没指定这个变量值，则使用本文件中定义的缺省全局变量值
+          onMatch: ACCEPT
+          onMismatch: DENY
+
+    RollingFile: # 输出到文件，超过128MB归档
+      - name: ROLLING_FILE
+        ignoreExceptions: false
+        fileName: "${LOG_PATH}/${LOG_FILENAME}.log"
+        filePattern: "${log.path}/$${date:yyyy-MM}/${project.name}-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss} : %4p %t (%F:%L) - %m%n"
+        Policies:
+          TimeBasedTriggeringPolicy:  # 基于时间的归档策略
+            interval: "1"
+            modulate: "true"
+        #          SizeBasedTriggeringPolicy: # 基于大小的封存策略
+        #            size: "128 MB"
+        ThresholdFilter:
+          level: ${sys:ROLLING_FILE_LEVEL} # “sys:”表示：如果VM参数中没指定这个变量值，则使用本文件中定义的缺省全局变量值
+          onMatch: ACCEPT
+          onMismatch: DENY
+        DefaultRolloverStrategy:
+          max: 100
+
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        - ref: CONSOLE
+        - ref: ROLLING_FILE

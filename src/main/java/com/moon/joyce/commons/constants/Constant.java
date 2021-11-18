@@ -1,11 +1,20 @@
-package com.moon.joyce.commons.contracts;
+package com.moon.joyce.commons.constants;
+
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @author Xing Dao Rong
  * @date 2021/9/1 16:24
  * @desc 定量
  */
-public class Contract {
+public class Constant {
+    //邮件密令
+    @Value("${email.password}")
+    public static   String password ;
+    @Value("${email.emailPassword}")
+    public static   String emailPassword ;
+    @Value("${email.username}")
+    public static   String email ;
     /**
      * 算法类型
      */
@@ -22,7 +31,7 @@ public class Contract {
      * user拦截器
      */
     //当前时间
-    public static final String SESSION_VERIFY_CODE = "session_VerifyCode";
+    public static final String SESSION_VERIFY_CODE = "session_verifyCode";
     //当前登录人
     public static final String SESSION_USER = "session_user";
     //登录路径
@@ -50,6 +59,8 @@ public class Contract {
     public static final String USER_TYPE_UP_VAILD_STATUS ="type:up_vaild_status";
     //用户升级vip
     public static final String USER_TYPE_UP_VIP_STATUS ="type:up_vip_status";
+    //用户websocketSessionId
+    public static final String USER_TYPE_WEBSOCKET_SESSION_ID ="type:websocket_session_id";
     //用户未激活状态
     public static final Integer USER_TYPE_INVAILD_STATUS =0;
     //用户有效状态
@@ -90,6 +101,26 @@ public class Contract {
     public static final String IP_ADDRESS_FORMULA = "^(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])$" ;
     //QQ验证
     public static final String QQ_FORMULA = "[1-9][0-9]{4,14}";
+    //url验证
+    public static final String URL_FORMULA = "^((https|http|ftp|rtsp|mms|ws)?://)"  //https、http、ftp、rtsp、mms、ws
+
+            + "?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?" //ftp的user@
+
+            + "(([0-9]{1,3}\\.){3}[0-9]{1,3}" // IP形式的URL- 例如：199.194.52.184
+
+            + "|" // 允许IP和DOMAIN（域名）
+
+            + "([0-9a-z_!~*'()-]+\\.)*" // 域名- www.
+
+            + "([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\\." // 二级域名
+
+            + "[a-z]{2,6})" // first level domain- .com or .museum
+
+            + "(:[0-9]{1,5})?" // 端口号最大为65535,5位数
+
+            + "((/?)|" // a slash isn't required if there is no file name
+
+            + "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
 
     /**
      * controller拼接
@@ -101,13 +132,13 @@ public class Contract {
      * qq_email参数设置
      */
     //发送人的qq邮件
-    public static final String SEND_EMAIL_CODE = "1692239985@qq.com";
+    public static final String SEND_EMAIL_CODE = email;
     //发送人的qq密码
-    public static final String SEND_EMAIL_PASSWORD = "hqlovexx1017";
+    public static final String SEND_EMAIL_PASSWORD = emailPassword;
     //发送邮件格式
     public static final String SEND_EMAIL_FORMATE = "text/html;charset=UTF-8";
     //发送人的授权码
-    public static final String SEND_EMAIL_AUTH_CODE = "rhvyoanzgysdgcdc";
+    public static final String SEND_EMAIL_AUTH_CODE = password;
     //发送验证码的模板
     public static final String SEND_EMAIL_TEMPLATE = "来自Joyce网站的验证,您本次的验证码为:";
     //发送url激活模板
@@ -141,6 +172,12 @@ public class Contract {
     //查询的用户已存在
     public static final String CHINESE_SLECET_EXIST_USERNAME_MESSAGE= "该用户已存在";
     public static final String SELECT_EXIST_USERNAME_MESSAGE= "The username already exist";
+    //查询的用户已存在
+    public static final String CHINESE_SLECET_EXIST_EMAIL_MESSAGE= "该邮件已注册";
+    public static final String SELECT_EXIST_EMAIL_MESSAGE= "The email already exist";
+    //查询的用户已存在
+    public static final String CHINESE_SLECET_EXIST_PHONE_MESSAGE= "该手机号码已存在";
+    public static final String SELECT_EXIST_PHONE_MESSAGE= "The phone already exist";
     //未知错误
     public static final String CHINESE_ERROR_MESSAGE= "系统繁忙，请稍后再试！";
     public static final String ERROR_MESSAGE= "System busy, please try again later!";
@@ -150,6 +187,9 @@ public class Contract {
     //用户未激活
     public static final String CHINESE_FROZEN_MESSAGE= "用户已冻结，请查看详细信息！";
     public static final String FROZEN_MESSAGE= "The user has been frozen. Please view details!";
+    //用户密码有误
+    public static final String CHINESE_PASSWORD_ERROR_MESSAGE= "用户密码错误！";
+    public static final String PASSWORD_ERROR_MESSAGE= "The password is error!";
     /**
      * Result 属性设置
      */
@@ -188,6 +228,24 @@ public class Contract {
     /**
      * 文件相关配置
      */
-    //默认文件
-    public static final String FILE_DEFAULT_NAME= "file0default0name";
+    //默认头像
+    public static final String FILE_DEFAULT_NAME= "/static/img/userImg/file0default0name.png";
+
+    /**
+     * PageComponent默认值
+     */
+    //fontName默认值
+    public static final String FONTSIZE_DEFAULT_NAME= "d_f_n";
+    //fontSize默认值
+    public static final String FONTSIZE_DEFAULT_SIZE= "15px";
+    //file默认值
+    public static final String FILE_DEFAULT_SET_NAME= "d_fi_n";
+    //fontSize默认值
+    public static final String FILE_DEFAULT_URL= FILE_DEFAULT_NAME;
+    //backgroundUrl默认值
+    public static final String BACKGROUND_DEFAULT_URL= FILE_DEFAULT_NAME;
+    //backgroundType默认值
+    public static final String BACKGROUND_DEFAULT_TYPE= "img";
+    //backgroundColor默认值
+    public static final String BACKGROUND_DEFAULT_COLOR= "white";
 }

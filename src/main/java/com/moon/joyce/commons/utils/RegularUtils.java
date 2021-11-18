@@ -13,14 +13,13 @@ import java.util.regex.Pattern;
  */
 public class RegularUtils implements Serializable {
     private static final long serialVersionUID = -6630082575745822212L;
-
     /**
      * 正则匹配
      * @param var 需要匹配的参数
      * @param formula 正则表达式
      * @return
      */
-    public boolean matcherUtil(String var,String  formula) {
+    public static boolean matcherUtil(String var,String  formula) {
         Pattern p = null;
         Matcher m = null;
         boolean b = false;

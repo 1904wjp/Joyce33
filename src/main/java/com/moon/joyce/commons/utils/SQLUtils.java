@@ -9,9 +9,6 @@ import java.io.Serializable;
  */
 public class SQLUtils implements Serializable {
     private static final long serialVersionUID = -726828122220412530L;
-    /**
-     * 检验sql语句是否正确
-     */
 
 
 }
